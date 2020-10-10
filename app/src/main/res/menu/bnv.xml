@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/new_group"
+        android:enabled="true"
+        android:icon="@mipmap/home_bnv"
+        android:title="New Group" />
+
+    <item
+        android:id="@+id/starred_messages"
+        android:enabled="true"
+        android:icon="@mipmap/notification_bnv"
+        android:title="Starred messages"
+     />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:enabled="true"
+        android:icon="@mipmap/profile_bnv"
+        android:title="Settings"
+     />
+
+</menu>

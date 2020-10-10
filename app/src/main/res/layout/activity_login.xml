@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/root_login_constraintlayout"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".view.activity.LoginActivity">
+
+    <ProgressBar
+        android:id="@+id/pg_login_"
+        android:visibility="gone"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/applogo_black"
+        app:layout_constraintEnd_toEndOf="@+id/Konnect1"
+        app:layout_constraintStart_toStartOf="@+id/applogo_black"
+        app:layout_constraintTop_toTopOf="@+id/applogo_black" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="50dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/applogo_black"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@mipmap/applogo_rouund_logotype"
+        app:layout_constraintBottom_toBottomOf="@+id/Konnect1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/Konnect1" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/Konnect1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunitosans_extrabold"
+        android:text="Konnect"
+
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/profile_email_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="@font/nunitosans_regular"
+        android:hint="Email"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/profile_login_btn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/Konnect1"
+        app:layout_constraintVertical_bias="0.33" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/profile_password_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:fontFamily="@font/nunitosans_regular"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/profile_email_login" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/profile_login_btn"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/buttons_back"
+        android:fontFamily="@font/nunitosans_bold"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/signup_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/nunitosans_regular"
+        android:gravity="center"
+        android:onClick="SignintoAccount"
+        android:text="Click here Signin with New Account"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/profile_login_btn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+
+    <LinearLayout
+
+        android:id="@+id/ll_invalidemailpassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/lightyellow"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/profile_email_login"
+
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/Konnect1">
+
+
+        <TextView
+            android:id="@+id/invaliemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Invalid Email Or Password"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/forgot_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:onClick="forgotPassword"
+        android:text="forgot password? click here"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/signup_btn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
