@@ -93,8 +93,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void logoutpassword() {
-        Bundle bundle = new Bundle();
-        bundle.putString("logout",);
+
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
 
