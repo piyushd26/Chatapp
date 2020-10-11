@@ -32,6 +32,16 @@
             app:layout_constraintStart_toEndOf="@+id/image_profile"
             app:layout_constraintTop_toBottomOf="@+id/phoneprofile" />
 
+        <ProgressBar
+            android:id="@+id/pg_settin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/status"
+            app:layout_constraintStart_toEndOf="@+id/status"
+            app:layout_constraintTop_toTopOf="@+id/status" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/emailverify"
             android:layout_width="wrap_content"
@@ -46,7 +56,7 @@
             app:layout_constraintStart_toEndOf="@+id/image_profile"
             app:layout_constraintTop_toBottomOf="@+id/verify" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_profile"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -58,6 +68,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/select"
+            android:background="@drawable/ic_baseline_add_circle_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/image_profile"
+            app:layout_constraintEnd_toEndOf="@+id/image_profile" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name_profile"
             android:layout_width="wrap_content"

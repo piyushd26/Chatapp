@@ -2,6 +2,7 @@ package com.example.chatapp.common;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -9,10 +10,18 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.chatapp.presenter.SignUpPresenter;
+import com.example.chatapp.view.activity.SettingsActivity;
 import com.example.chatapp.view.fragments.BaseFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Utillity {
 
@@ -98,6 +107,18 @@ public class Utillity {
             return true;
         }
 
+    }
+
+    public static void getStoredProfileImage(StorageReference storageReference, FirebaseAuth firebaseAuth, final SignUpPresenter signUpPresenter, final CircleImageView imageProfile, final SettingsActivity settingsActivity) {
+        StorageReference profileref = storageReference.child("users/"+firebaseAuth.getCurrentUser().getUid()+"/profile.jpg");
+        signUpPresenter.startFetch();
+        profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(settingsActivity).load(uri).into(imageProfile);
+                signUpPresenter.endFetch();
+            }
+        });
     }
 
 

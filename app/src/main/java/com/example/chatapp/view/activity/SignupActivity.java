@@ -94,7 +94,7 @@ public class SignupActivity extends AppCompatActivity implements DataInterface {
         linearLayout_wwFemale = findViewById(R.id.ww_ll);
         layout = findViewById(R.id.root_cons_ll);
         Name_et = findViewById(R.id.profile_name);
-        profileImage = findViewById(R.id.profile_picture);
+        //profileImage = findViewById(R.id.profile_picture);
         progressBar = findViewById(R.id.pg_signup);
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -105,7 +105,7 @@ public class SignupActivity extends AppCompatActivity implements DataInterface {
         signInButton();
         gendermale();
         genderfemale();
-        profileImageSelection();
+        //profileImageSelection();
 
 
     }
@@ -202,12 +202,12 @@ public class SignupActivity extends AppCompatActivity implements DataInterface {
 
     private void profileImageSelection() {
         //layout.setBackgroundResource(random.nextInt(BACKKGROUNDIMAGES.length));
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheetMenu();
-            }
-        });
+       // profileImage.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+       //     public void onClick(View v) {
+       //         bottomSheetMenu();
+       //     }
+       // });
 
 
     }

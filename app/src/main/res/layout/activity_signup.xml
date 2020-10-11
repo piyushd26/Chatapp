@@ -87,24 +87,14 @@
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/Konnect" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_picture"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/profilepicture"
-        app:layout_constraintBottom_toTopOf="@+id/profile_name"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/enter_details" />
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/profile_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:fontFamily="@font/nunitosans_bold"
-        android:hint="Name"
         android:gravity="center"
+        android:hint="Name"
         android:inputType="textCapSentences"
         android:textColor="@color/black"
         android:textColorHint="@color/grey"
@@ -112,7 +102,8 @@
         app:layout_constraintBottom_toTopOf="@+id/profile_signup_btn"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/enter_details"
+        app:layout_constraintVertical_bias="0.06999999" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/profile_email"
