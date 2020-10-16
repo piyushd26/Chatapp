@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
@@ -59,16 +58,16 @@ public class ChatsActivity extends AppCompatActivity {
         back = findViewById(R.id.btn_back);
         storageReference = FirebaseStorage.getInstance().getReference();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        userProfile = intent.getStringExtra("userProfile");
+        //userProfile = intent.getStringExtra("userProfile");
         circleImageView = findViewById(R.id.chat_image);
         chatlastseen = findViewById(R.id.seen);
         edmessage = findViewById(R.id.Type);
 
 
-        Utillity.getStoredProfileImage(storageReference, signUpPresenter, circleImageView, this, userid);
+        Utillity.getStoredProfileImage(storageReference, signUpPresenter, circleImageView, this, receiverId);
 
         if (receiverId != null) {
-            Picasso.with(ChatsActivity.this).load(userProfile).into(circleImageView);
+            //Picasso.with(ChatsActivity.this).load().into(circleImageView);
             chatprofilename.setText(username);
 
         }

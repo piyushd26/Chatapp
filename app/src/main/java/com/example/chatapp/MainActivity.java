@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -28,24 +28,21 @@ import com.example.chatapp.view.fragments.BaseFragment;
 import com.example.chatapp.view.fragments.Tab1;
 import com.example.chatapp.view.fragments.Tab2;
 import com.example.chatapp.view.fragments.Tab3;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements DataInterface {
 
@@ -71,7 +68,10 @@ public class MainActivity extends AppCompatActivity implements DataInterface {
     ChatList chatList = new ChatList();
     DocumentReference documentReference;
     Toolbar toolbar;
+    CircleImageView profileImage;
     FirebaseUser firebaseUser;
+    StorageReference storageReference;
+    QueryDocumentSnapshot queryDocumentSnapshot;
 
 
 
@@ -85,16 +85,17 @@ public class MainActivity extends AppCompatActivity implements DataInterface {
         BaseFragment.setDataInterface(this);
 
 
-
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
         signUpPresenter = new SignUpPresenter(BaseFragment.getDataInterface());
         userData = new UserData();
+        profileImage = findViewById(R.id.im);
+
         toolbarTV = findViewById(R.id.toolbar_tv);
         chatListRV = findViewById(R.id.rv_chatlist);
-        floatingActionButton= findViewById(R.id.fab);
-
+        floatingActionButton = findViewById(R.id.fab);
+        storageReference= FirebaseStorage.getInstance().getReference();
         tabLayout = findViewById(R.id.tablayput);
         viewPager = findViewById(R.id.viewpager);
         toolbar = findViewById(R.id.include_toolbar);
@@ -102,13 +103,11 @@ public class MainActivity extends AppCompatActivity implements DataInterface {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         setSupportActionBar(toolbar);
-
+        Utillity.getStoredProfileImage(storageReference,signUpPresenter,profileImage,this,firebaseAuth.getUid());
+        //toolbarTV.setText(queryDocumentSnapshot.getString("fName"));
         //  retrievedDataFromFireStore();
 
         viewPager();
-
-
-
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -121,14 +120,6 @@ public class MainActivity extends AppCompatActivity implements DataInterface {
     }
 
 
-
-
-
-
-
-
-
-
     private void viewPager() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(Tab1.getInstance(), "Chats");
@@ -138,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements DataInterface {
         tabLayout.setupWithViewPager(viewPager);
 
     }
-
 
 
     @Override

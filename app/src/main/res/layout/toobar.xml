@@ -3,49 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    tools:menu="@menu/bnv"
-
     android:layout_height="wrap_content"
-    android:elevation="4dp"
+
+    android:background="@color/appdarkgeen"
+
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    android:background="@color/appdarkgeen">
+    tools:menu="@menu/bnv">
 
 
     <LinearLayout
         android:id="@+id/toobar_ll"
-        android:weightSum="10"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="10">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/im"
-        android:layout_width="50dp"
-        android:layout_gravity="center"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@mipmap/applogo_logotype"
-        />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/im"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@mipmap/applogo_logotype" />
+
         <TextView
             android:id="@+id/toolbar_tv"
-            android:layout_weight="10"
             android:layout_width="wrap_content"
             android:layout_height="62dp"
+            android:layout_weight="10"
             android:fontFamily="@font/nunitosans_bold"
+            android:gravity="center|left"
             android:paddingLeft="10dp"
-            android:gravity="center"
+            android:text="Welcome"
             android:textColor="@color/white"
-            android:textSize="30dp"
-            />
+            android:textSize="30dp" />
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center" />
 
     </LinearLayout>
 

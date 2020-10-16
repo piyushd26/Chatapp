@@ -150,9 +150,9 @@ public class Utillity {
                             chatLists.add(chatList);
 
                         }
-
+                        chatListAdapter.updateData(chatLists,userID);
                     }
-                    chatListAdapter.updateData(chatLists);
+
                 }
             });
 

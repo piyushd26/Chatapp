@@ -78,7 +78,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             }
         });
 
-        Utillity.getStoredProfileImage(storageReference,signUpPresenter,holder.circleImageView,fabActivity,firebaseUserid);
+        Utillity.getStoredProfileImage(storageReference,signUpPresenter,holder.circleImageView,fabActivity,chatList.getUserid());
 
     }
 
@@ -87,8 +87,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         return chatLists.size();
     }
 
-    public void updateData(List<ChatList> chatList) {
+    public void updateData(List<ChatList> chatList, String userID) {
         this.chatLists = chatList;
+       // this.firebaseUserid=userID;
         notifyDataSetChanged();
     }
 
