@@ -36,9 +36,10 @@
             android:id="@+id/pg_settin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginStart="12dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/status"
+            app:layout_constraintEnd_toStartOf="@+id/phoneprofile"
             app:layout_constraintStart_toEndOf="@+id/status"
             app:layout_constraintTop_toTopOf="@+id/status" />
 

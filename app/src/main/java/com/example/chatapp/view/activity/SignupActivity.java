@@ -34,6 +34,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,6 +66,7 @@ public class SignupActivity extends AppCompatActivity implements DataInterface {
     String selectedEmail;
     CircleImageView profileImage;
     Random random = new Random();
+    StorageReference storageReference;
     DataInterface dataInterface;
     BottomSheetDialog bottomSheetDialog;
     ProgressBar progressBar;
@@ -87,6 +90,7 @@ public class SignupActivity extends AppCompatActivity implements DataInterface {
         email_et = findViewById(R.id.profile_email);
         password_et = findViewById(R.id.profile_password);
         maleTV = findViewById(R.id.profile_male);
+        storageReference = FirebaseStorage.getInstance().getReference();
         femaleTV = findViewById(R.id.profile_female);
         male_bat_logo = findViewById(R.id.batman_imageview);
         female_ww_logo = findViewById(R.id.ww_imageview);
@@ -114,48 +118,51 @@ public class SignupActivity extends AppCompatActivity implements DataInterface {
     private void fireBase() {
         signUpPresenter = new SignUpPresenter(BaseFragment.getDataInterface());
         signUpPresenter.startFetch();
-        firebaseAuth.createUserWithEmailAndPassword(selectedEmail, selectedPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+                firebaseAuth.createUserWithEmailAndPassword(selectedEmail, selectedPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if (task.isSuccessful()) {
+                        if (task.isSuccessful()) {
 
-                    VerificationOfEmail();
+                            VerificationOfEmail();
 
 
-                    userID = firebaseAuth.getCurrentUser().getUid();
+                            userID = firebaseAuth.getCurrentUser().getUid();
 //FireStore putting values
-                    DocumentReference documentReference = firestore.collection("users").document(userID);
-                    Map<String, Object> user = new HashMap<>();
-                    user.put("fName", selectedName);
-                    user.put("email", selectedEmail);
-                    user.put("phone", selectedPhone);
-                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(SignupActivity.this, "Firestore data store", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(SignupActivity.this, "User Created", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                            finish();
+                            DocumentReference documentReference = firestore.collection("users").document(userID);
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("fName", selectedName);
+                            user.put("email", selectedEmail);
+                            user.put("phone", selectedPhone);
+                            user.put("userid",userID);
+
+                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SignupActivity.this, "Firestore data store", Toast.LENGTH_LONG).show();
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(SignupActivity.this, "User Created", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                    finish();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(SignupActivity.this, "Firestore data not store" + e.toString(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+
+                        } else {
+                            Toast.makeText(SignupActivity.this, "Error Occurred - " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(SignupActivity.this, "Firestore data not store" + e.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    });
 
-
-                } else {
-                    Toast.makeText(SignupActivity.this, "Error Occurred - " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
+                    }
+                });
 
     }
+
 
     private void VerificationOfEmail() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -202,12 +209,12 @@ public class SignupActivity extends AppCompatActivity implements DataInterface {
 
     private void profileImageSelection() {
         //layout.setBackgroundResource(random.nextInt(BACKKGROUNDIMAGES.length));
-       // profileImage.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-       //     public void onClick(View v) {
-       //         bottomSheetMenu();
-       //     }
-       // });
+        // profileImage.setOnClickListener(new View.OnClickListener() {
+        //     @Override
+        //     public void onClick(View v) {
+        //         bottomSheetMenu();
+        //     }
+        // });
 
 
     }

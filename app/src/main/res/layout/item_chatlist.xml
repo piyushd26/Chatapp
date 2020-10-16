@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/root_chatactivity"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/chatlist_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:text="Name"
+        android:fontFamily="@font/nunitosans_regular"
+        android:textColor="@color/black"
+        android:textSize="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chatlist_date"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/chatlist_image"
+        app:layout_constraintTop_toTopOf="@+id/chatlist_image" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/descrip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:text="des"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:fontFamily="@font/nunitosans_regular"
+        app:layout_constraintBottom_toBottomOf="@+id/chatlist_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/chatlist_name" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chatlist_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@mipmap/applogo_logotype"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chatlist_name"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/chatlist_date"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:text="DATE"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chatlist_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/chatlist_name"
+        app:layout_constraintTop_toTopOf="@+id/chatlist_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

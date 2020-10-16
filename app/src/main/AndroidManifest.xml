@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ActionBar.Transparent">
-        <activity android:name=".view.activity.SettingsActivity"></activity>
+        <activity android:name=".view.activity.ChatsActivity" android:theme="@style/AppThemeMain"></activity>
+        <activity android:name=".view.activity.FABActivity" android:theme="@style/AppThemeMain" />
+        <activity android:name=".view.activity.SettingsActivity" />
         <activity android:name=".view.activity.ResetPasswordActivity" />
         <activity android:name=".view.activity.LoginActivity" />
         <activity android:name=".view.activity.SignupActivity" />

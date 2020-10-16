@@ -1,5 +1,6 @@
 package com.example.chatapp.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -10,14 +11,21 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.chatapp.model.pojo.ChatList;
 import com.example.chatapp.presenter.SignUpPresenter;
 import com.example.chatapp.view.activity.SettingsActivity;
+import com.example.chatapp.view.adapter.ChatListAdapter;
 import com.example.chatapp.view.fragments.BaseFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -109,16 +117,46 @@ public class Utillity {
 
     }
 
-    public static void getStoredProfileImage(StorageReference storageReference, FirebaseAuth firebaseAuth, final SignUpPresenter signUpPresenter, final CircleImageView imageProfile, final SettingsActivity settingsActivity) {
-        StorageReference profileref = storageReference.child("users/"+firebaseAuth.getCurrentUser().getUid()+"/profile.jpg");
+    public static void getStoredProfileImage(StorageReference storageReference, final SignUpPresenter signUpPresenter, final CircleImageView imageProfile, final Activity activity, String userid) {
+        StorageReference profileref = storageReference.child("users/"+userid+"/profile.jpg");
         signUpPresenter.startFetch();
         profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Picasso.with(settingsActivity).load(uri).into(imageProfile);
+                Picasso.with(activity).load(uri).into(imageProfile);
                 signUpPresenter.endFetch();
             }
         });
+    }
+
+    public static void getcontactsList(final FirebaseFirestore firebaseFirestore, final String userID, final List<ChatList> chatLists, final ChatListAdapter chatListAdapter, final FirebaseUser firebaseUser) {
+            firebaseFirestore.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots) {
+                        String username = snapshot.getString("fName");
+                        String userid =snapshot.getString("userid");
+                        String userprofile =snapshot.getString("userprofile");
+
+                        ChatList chatList = new ChatList();
+                        chatList.setUsername(username);
+                        chatList.setUserid(userid);
+                        chatList.setUrlProfile(userprofile);
+
+
+
+
+                        if (userID != null && userID.equals(firebaseUser.getUid())) {
+                            chatLists.add(chatList);
+
+                        }
+
+                    }
+                    chatListAdapter.updateData(chatLists);
+                }
+            });
+
+
     }
 
 

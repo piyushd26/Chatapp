@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatapp.R;
 import com.example.chatapp.common.Utillity;
@@ -64,7 +65,7 @@ public class SettingsActivity extends AppCompatActivity implements DataInterface
     ProgressBar progressBar;
     ImageButton changeProfileImage;
     SignUpPresenter signUpPresenter;
-
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +79,7 @@ public class SettingsActivity extends AppCompatActivity implements DataInterface
         verified = findViewById(R.id.verify);
         clicktoverify = findViewById(R.id.emailverify);
         firebaseFirestore = FirebaseFirestore.getInstance();
+        recyclerView=findViewById(R.id.rv_chatlist);
         looutFrebaseUser = findViewById(R.id.logout);
         resetPassword = findViewById(R.id.reset_password);
         deleteFirebaseUser = findViewById(R.id.delete_account);
@@ -87,11 +89,11 @@ public class SettingsActivity extends AppCompatActivity implements DataInterface
         signUpPresenter=new SignUpPresenter(BaseFragment.getDataInterface());
 
         //get profile image from Firebase storage
-        Utillity.getStoredProfileImage(storageReference,firebaseAuth,signUpPresenter,imageProfile,this);
+        Utillity.getStoredProfileImage(storageReference,signUpPresenter,imageProfile,this,firebaseAuth.getCurrentUser().getUid());
 
+        retreiveFirestoreUserData();
 
         checkVerificationOfEmail();
-        retreiveFirestoreUserData();
 
 
         looutFrebaseUser.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +128,7 @@ public class SettingsActivity extends AppCompatActivity implements DataInterface
 
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
@@ -169,9 +172,8 @@ public class SettingsActivity extends AppCompatActivity implements DataInterface
     private void logoutProfile() {
 
         FirebaseAuth.getInstance().signOut();
+        finish();
         startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
-
-
 
     }
 
